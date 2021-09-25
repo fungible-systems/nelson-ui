@@ -1,0 +1,47 @@
+{
+  "name": "@nelson-ui/components",
+  "version": "0.0.0",
+  "scripts": {
+    "prebuild": "yarn typecheck && shx rm -rf ./dist",
+    "build": "yarn build:js && yarn build:tsc",
+    "build:js": "vite build",
+    "build:tsc": "rollup -c \"./rollup.config.js\"",
+    "dev:publish": "yalc publish --push",
+    "lint": "yarn lint:eslint && yarn lint:prettier",
+    "lint:eslint": "eslint \"src/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
+    "lint:prettier": "prettier --check \"src/**/*.{ts,tsx}\" *.js",
+    "lint:prettier:fix": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit --target esnext"
+  },
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "import": "dist/index.es.js",
+  "react-native": "dist/index.cjs.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "main": "dist/index.cjs.js",
+      "module": "dist/index.es.js",
+      "import": "dist/index.es.js",
+      "react-native": "dist/index.cjs.js",
+      "types": "dist/types/index.d.ts"
+    }
+  },
+  "dependencies": {
+    "@nelson-ui/theme": "*",
+    "@nelson-ui/core": "*",
+    "@vanilla-extract/css": "1.6.0",
+    "@vanilla-extract/sprinkles": "1.3.0",
+    "dessert-box": "0.4.1"
+  },
+  "prettier": "@stacks/prettier-config",
+  "devDependencies": {
+    "@types/node": "16.9.6",
+    "@types/react": "17.0.24",
+    "@types/react-dom": "17.0.9",
+    "ts-eager": "2.0.2",
+    "typescript": "4.4.3"
+  }
+}
