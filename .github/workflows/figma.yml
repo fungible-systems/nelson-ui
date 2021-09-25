@@ -6,7 +6,7 @@ name: Open Figma PR
 
 on:
   schedule:
-    - cron:  '0 */3 * * *'
+    - cron: '0 */3 * * *'
   workflow_dispatch:
 
 jobs:
@@ -19,14 +19,37 @@ jobs:
           token: ${{ secrets.FIGMA_GITHUB_TOKEN }}
           ref: main
 
-      - name: Update Figma JSON
+      - name: setup node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+
+      - name: install pnpm
+        run: npm i pnpm@latest -g
+
+      - name: setup pnpm config
+        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
+
+      - name: install dependencies
+        run: pnpm install
+
+      - name: update Figma JSON
         id: figma
         run: |
           curl -s -H 'X-Master-Key: ${{ secrets.FIGMA_API_KEY }}' 'https://api.jsonbin.io/v3/b/608023f5027da70c476dcd52/latest' | jq -r > packages/theme/scripts/figma.json
+
+      - name: add Figma changeset
+        id: figma-changset
+        run: |
           FILE_CHANGED=$(git status --porcelain)
           if [[ -n "${FILE_CHANGED}" ]]; then
-            echo -e "---\n'@nelson-ui/theme': patch\n---\n\nUpdate figma.json\n" > .changeset/figma-update.md
+          echo -e "---\n'@nelson-ui/theme': patch\n---\n\nUpdate figma.json\n" > .changeset/figma-update.md && pnpm
           fi
+
+      - name: generate new theme
+        run: pnpm ci:generate
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:

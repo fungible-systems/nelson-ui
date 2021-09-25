@@ -37,7 +37,7 @@ export const borderRadius = ${JSON.stringify(borderRadius)} as const;
 export const boxShadow = ${JSON.stringify(boxShadow)} as const;
 export const lineHeights = ${JSON.stringify(lineHeights)} as const;`;
 
-  fs.writeFileSync(path.resolve('./src', './theme/generated.ts'), fileContents);
+  fs.writeFileSync(path.resolve('./src/generated.ts'), fileContents);
 }
 
 run()
