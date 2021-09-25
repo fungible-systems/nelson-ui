@@ -16,7 +16,7 @@ jobs:
       - name: Checkout UI
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.FIGMA_GITHUB_TOKEN }}
           ref: main
 
       - name: Update Figma JSON
