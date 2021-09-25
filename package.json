@@ -4,7 +4,9 @@
   "scripts": {
     "lint": "ultra -r lint",
     "build": "ultra -r build",
-    "dev:publish": "ultra -r dev:publish"
+    "dev:publish": "ultra -r dev:publish",
+    "ci:publish": "ultra publish",
+    "ci:version": "changeset version"
   },
   "private": true,
   "dependencies": {},
