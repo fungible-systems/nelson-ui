@@ -5,7 +5,7 @@
     "lint": "ultra -r lint",
     "build": "ultra -r build",
     "dev:publish": "ultra -r dev:publish",
-    "ci:publish": "pnpm build && changeset publish --access public",
+    "ci:publish": "pnpm build && pnpm publish -r --no-git-checks --access public",
     "ci:version": "pnpm changeset version && pnpm install --no-frozen-lockfile && git add ."
   },
   "private": true,
