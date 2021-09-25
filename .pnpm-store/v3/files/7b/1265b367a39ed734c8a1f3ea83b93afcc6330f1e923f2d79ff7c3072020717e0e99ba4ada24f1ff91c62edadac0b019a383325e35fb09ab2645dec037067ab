@@ -1,0 +1,91 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var path = require('path');
+var vite = require('vite');
+var integration = require('@vanilla-extract/integration');
+
+function _interopDefault (e) { return e && e.__esModule ? e : { 'default': e }; }
+
+var path__default = /*#__PURE__*/_interopDefault(path);
+
+function vanillaExtractPlugin({
+  identifiers,
+  devStyleRuntime = 'vite'
+} = {}) {
+  let config;
+  let packageInfo;
+  let useRuntime = false;
+  const cssMap = new Map();
+  return {
+    name: 'vanilla-extract',
+    enforce: 'pre',
+
+    configResolved(resolvedConfig) {
+      config = resolvedConfig;
+      useRuntime = devStyleRuntime === 'vanilla-extract' && config.command === 'serve';
+      packageInfo = integration.getPackageInfo(config.root);
+    },
+
+    resolveId(id) {
+      if (integration.virtualCssFileFilter.test(id)) {
+        const {
+          fileName,
+          source
+        } = integration.getSourceFromVirtualCssFile(id); // resolveId shouldn't really cause a side-effect however custom module meta isn't currently working
+        // This is a hack work around until https://github.com/vitejs/vite/issues/3240 is resolved
+
+        const shortHashFileName = vite.normalizePath(`${fileName}?hash=${integration.hash(source)}`);
+        cssMap.set(shortHashFileName, source);
+        return shortHashFileName;
+      }
+    },
+
+    load(id) {
+      if (cssMap.has(id)) {
+        const css = cssMap.get(id);
+        cssMap.delete(id);
+        return css;
+      }
+
+      return null;
+    },
+
+    async transform(code, id, ssr) {
+      if (!integration.cssFileFilter.test(id)) {
+        return null;
+      }
+
+      if (ssr || useRuntime) {
+        return integration.addFileScope({
+          source: code,
+          filePath: vite.normalizePath(path__default['default'].relative(packageInfo.dirname, id)),
+          packageInfo
+        }).source;
+      }
+
+      const {
+        source,
+        watchFiles
+      } = await integration.compile({
+        filePath: id,
+        cwd: config.root
+      });
+
+      for (const file of watchFiles) {
+        this.addWatchFile(file);
+      }
+
+      return integration.processVanillaFile({
+        source,
+        filePath: id,
+        outputCss: !ssr,
+        identOption: identifiers !== null && identifiers !== void 0 ? identifiers : config.mode === 'production' ? 'short' : 'debug'
+      });
+    }
+
+  };
+}
+
+exports.vanillaExtractPlugin = vanillaExtractPlugin;

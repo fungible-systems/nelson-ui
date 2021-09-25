@@ -1,0 +1,6 @@
+import '@vanilla-extract/private';
+import 'cssesc';
+import '../../adapter/dist/vanilla-extract-css-adapter.esm.js';
+export { t as transformCss } from '../../dist/transformCss-ba88cf68.esm.js';
+import 'css-what';
+import 'dedent';
