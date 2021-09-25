@@ -30,7 +30,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.FIGMA_GITHUB_TOKEN }}
           commit-message: 'chore: update figma.json'
           branch: auto/figma-update
           title: "figma json update"
