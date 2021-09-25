@@ -1,0 +1,447 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var transformCss_dist_vanillaExtractCssTransformCss = require('./transformCss-b85b1d9b.cjs.prod.js');
+var adapter_dist_vanillaExtractCssAdapter = require('../adapter/dist/vanilla-extract-css-adapter.cjs.prod.js');
+var hash = require('@emotion/hash');
+var fileScope_dist_vanillaExtractCssFileScope = require('../fileScope/dist/vanilla-extract-css-fileScope.cjs.prod.js');
+var _private = require('@vanilla-extract/private');
+var cssesc = require('cssesc');
+var deepObjectDiff = require('deep-object-diff');
+var chalk = require('chalk');
+var dedent = require('dedent');
+var deepmerge = require('deepmerge');
+require('css-what');
+
+function _interopDefault (e) { return e && e.__esModule ? e : { 'default': e }; }
+
+var hash__default = /*#__PURE__*/_interopDefault(hash);
+var cssesc__default = /*#__PURE__*/_interopDefault(cssesc);
+var chalk__default = /*#__PURE__*/_interopDefault(chalk);
+var dedent__default = /*#__PURE__*/_interopDefault(dedent);
+var deepmerge__default = /*#__PURE__*/_interopDefault(deepmerge);
+
+const stylesheets = {};
+const localClassNames = new Set();
+const composedClassLists = [];
+let bufferedCSSObjs = [];
+
+function getStylesheet({
+  packageName,
+  filePath
+}) {
+  const fileScopeId = packageName ? `${packageName}${filePath}` : filePath;
+
+  if (stylesheets[fileScopeId]) {
+    return stylesheets[fileScopeId];
+  }
+
+  const styleEl = document.createElement('style');
+  document.head.appendChild(styleEl);
+
+  if (!styleEl.sheet) {
+    throw new Error(`Couldn't create stylesheet`);
+  }
+
+  stylesheets[fileScopeId] = styleEl.sheet;
+  return styleEl.sheet;
+}
+
+const browserRuntimeAdapter = {
+  appendCss: cssObj => {
+    bufferedCSSObjs.push(cssObj);
+  },
+  registerClassName: className => {
+    localClassNames.add(className);
+  },
+  registerComposition: composition => {
+    composedClassLists.push(composition);
+  },
+  markCompositionUsed: () => {},
+  onEndFileScope: fileScope => {
+    const css = transformCss_dist_vanillaExtractCssTransformCss.transformCss({
+      localClassNames: Array.from(localClassNames),
+      composedClassLists,
+      cssObjs: bufferedCSSObjs
+    });
+    const stylesheet = getStylesheet(fileScope);
+    const existingRuleCount = stylesheet.cssRules.length;
+    let ruleIndex = 0;
+
+    for (const rule of css) {
+      try {
+        if (ruleIndex < existingRuleCount) {
+          stylesheet.deleteRule(ruleIndex);
+        }
+
+        stylesheet.insertRule(rule, ruleIndex++);
+      } catch (e) {
+        console.warn(`Failed to insert rule\n${rule}`); // insert placeholder rule to keep index count correct
+
+        stylesheet.insertRule('.--placeholder-rule--{}', ruleIndex - 1);
+      }
+    } // Delete remaining rules
+
+
+    while (ruleIndex < existingRuleCount) {
+      stylesheet.deleteRule(ruleIndex++);
+    }
+
+    bufferedCSSObjs = [];
+  },
+  getIdentOption: () => 'short' 
+};
+
+if (typeof window !== 'undefined') {
+  adapter_dist_vanillaExtractCssAdapter.setAdapterIfNotSet(browserRuntimeAdapter);
+}
+
+function getDevPrefix(debugId) {
+  const parts = debugId ? [debugId] : [];
+  const {
+    filePath
+  } = fileScope_dist_vanillaExtractCssFileScope.getFileScope();
+  const matches = filePath.match(/(?<dir>[^\/\\]*)?[\/\\]?(?<file>[^\/\\]*)\.css\.(ts|js|tsx|jsx)$/);
+
+  if (matches && matches.groups) {
+    const {
+      dir,
+      file
+    } = matches.groups;
+    parts.unshift(file && file !== 'index' ? file : dir);
+  }
+
+  return parts.join('_');
+}
+
+function generateIdentifier(debugId) {
+  // Convert ref count to base 36 for optimal hash lengths
+  const refCount = fileScope_dist_vanillaExtractCssFileScope.getAndIncrementRefCounter().toString(36);
+  const {
+    filePath,
+    packageName
+  } = fileScope_dist_vanillaExtractCssFileScope.getFileScope();
+  const fileScopeHash = hash__default['default'](packageName ? `${packageName}${filePath}` : filePath);
+  let identifier = `${fileScopeHash}${refCount}`;
+
+  if (adapter_dist_vanillaExtractCssAdapter.getIdentOption() === 'debug') {
+    const devPrefix = getDevPrefix(debugId);
+
+    if (devPrefix) {
+      identifier = `${devPrefix}__${identifier}`;
+    }
+  }
+
+  return identifier.match(/^[0-9]/) ? `_${identifier}` : identifier;
+}
+
+const normaliseObject = obj => _private.walkObject(obj, () => '');
+
+function validateContract(contract, tokens) {
+  const theDiff = deepObjectDiff.diff(normaliseObject(contract), normaliseObject(tokens));
+  const valid = Object.keys(theDiff).length === 0;
+  return {
+    valid,
+    diffString: valid ? '' : renderDiff(contract, theDiff)
+  };
+}
+
+function diffLine(value, nesting, type) {
+  const whitespace = [...Array(nesting).keys()].map(() => '  ').join('');
+  const line = `${type ? type : ' '}${whitespace}${value}`;
+
+  {
+    if (type === '-') {
+      return chalk__default['default'].red(line);
+    }
+
+    if (type === '+') {
+      return chalk__default['default'].green(line);
+    }
+  }
+
+  return line;
+}
+
+function renderDiff(orig, diff, nesting = 0) {
+  const lines = [];
+
+  if (nesting === 0) {
+    lines.push(diffLine('{', 0));
+  }
+
+  const innerNesting = nesting + 1;
+  const keys = Object.keys(diff).sort();
+
+  for (const key of keys) {
+    const value = diff[key];
+
+    if (!(key in orig)) {
+      lines.push(diffLine(`${key}: ...,`, innerNesting, '+'));
+    } else if (typeof value === 'object') {
+      lines.push(diffLine(`${key}: {`, innerNesting));
+      lines.push(renderDiff(orig[key], diff[key], innerNesting));
+      lines.push(diffLine('}', innerNesting));
+    } else {
+      lines.push(diffLine(`${key}: ...,`, innerNesting, '-'));
+    }
+  }
+
+  if (nesting === 0) {
+    lines.push(diffLine('}', 0));
+  }
+
+  return lines.join('\n');
+}
+
+function createVar(debugId) {
+  // Convert ref count to base 36 for optimal hash lengths
+  const refCount = fileScope_dist_vanillaExtractCssFileScope.getAndIncrementRefCounter().toString(36);
+  const {
+    filePath,
+    packageName
+  } = fileScope_dist_vanillaExtractCssFileScope.getFileScope();
+  const fileScopeHash = hash__default['default'](packageName ? `${packageName}${filePath}` : filePath);
+  const varName = adapter_dist_vanillaExtractCssAdapter.getIdentOption() === 'debug' && debugId ? `${debugId}__${fileScopeHash}${refCount}` : `${fileScopeHash}${refCount}`;
+  const cssVarName = cssesc__default['default'](varName.match(/^[0-9]/) ? `_${varName}` : varName, {
+    isIdentifier: true
+  });
+  return `var(--${cssVarName})`;
+}
+function fallbackVar(...values) {
+  let finalValue = '';
+  values.reverse().forEach(value => {
+    if (finalValue === '') {
+      finalValue = String(value);
+    } else {
+      if (typeof value !== 'string' || !/^var\(--.*\)$/.test(value)) {
+        throw new Error(`Invalid variable name: ${value}`);
+      }
+
+      finalValue = value.replace(/\)$/, `, ${finalValue})`);
+    }
+  });
+  return finalValue;
+}
+function assignVars(varContract, tokens) {
+  const varSetters = {};
+  const {
+    valid,
+    diffString
+  } = validateContract(varContract, tokens);
+
+  if (!valid) {
+    throw new Error(`Tokens don't match contract.\n${diffString}`);
+  }
+
+  _private.walkObject(tokens, (value, path) => {
+    varSetters[_private.get(varContract, path)] = String(value);
+  });
+  return varSetters;
+}
+function createThemeContract(tokens) {
+  return _private.walkObject(tokens, (_value, path) => {
+    return createVar(path.join('-'));
+  });
+}
+function createGlobalThemeContract(tokens, mapFn) {
+  return _private.walkObject(tokens, (value, path) => {
+    const rawVarName = typeof mapFn === 'function' ? mapFn(value, path) : value;
+    const varName = typeof rawVarName === 'string' ? rawVarName.replace(/^\-\-/, '') : null;
+
+    if (typeof varName !== 'string' || varName !== cssesc__default['default'](varName, {
+      isIdentifier: true
+    })) {
+      throw new Error(`Invalid variable name for "${path.join('.')}": ${varName}`);
+    }
+
+    return `var(--${varName})`;
+  });
+}
+
+function createGlobalTheme(selector, arg2, arg3) {
+  const shouldCreateVars = Boolean(!arg3);
+  const themeVars = shouldCreateVars ? createThemeContract(arg2) : arg2;
+  const tokens = shouldCreateVars ? arg2 : arg3;
+  adapter_dist_vanillaExtractCssAdapter.appendCss({
+    type: 'global',
+    selector: selector,
+    rule: {
+      vars: assignVars(themeVars, tokens)
+    }
+  }, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+
+  if (shouldCreateVars) {
+    return themeVars;
+  }
+}
+function createTheme(arg1, arg2, arg3) {
+  const themeClassName = generateIdentifier(typeof arg2 === 'object' ? arg3 : arg2);
+  adapter_dist_vanillaExtractCssAdapter.registerClassName(themeClassName);
+  const vars = typeof arg2 === 'object' ? createGlobalTheme(themeClassName, arg1, arg2) : createGlobalTheme(themeClassName, arg1);
+  return vars ? [themeClassName, vars] : themeClassName;
+}
+
+function composedStyle(rules, debugId) {
+  const className = generateIdentifier(debugId);
+  adapter_dist_vanillaExtractCssAdapter.registerClassName(className);
+  const classList = [];
+  const styleRules = [];
+
+  for (const rule of rules) {
+    if (typeof rule === 'string') {
+      classList.push(rule);
+    } else {
+      styleRules.push(rule);
+    }
+  }
+
+  let result = className;
+
+  if (classList.length > 0) {
+    result = `${className} ${transformCss_dist_vanillaExtractCssTransformCss.dudupeAndJoinClassList(classList)}`;
+    adapter_dist_vanillaExtractCssAdapter.registerComposition({
+      identifier: className,
+      classList: result
+    });
+
+    if (styleRules.length > 0) {
+      // If there are styles attached to this composition then it is
+      // always used and should never be removed
+      adapter_dist_vanillaExtractCssAdapter.markCompositionUsed(className);
+    }
+  }
+
+  if (styleRules.length > 0) {
+    const rule = deepmerge__default['default'].all(styleRules, {
+      // Replace arrays rather than merging
+      arrayMerge: (_, sourceArray) => sourceArray
+    });
+    adapter_dist_vanillaExtractCssAdapter.appendCss({
+      type: 'local',
+      selector: className,
+      rule
+    }, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+  }
+
+  return result;
+}
+
+function style(rule, debugId) {
+  if (Array.isArray(rule)) {
+    return composedStyle(rule, debugId);
+  }
+
+  const className = generateIdentifier(debugId);
+  adapter_dist_vanillaExtractCssAdapter.registerClassName(className);
+  adapter_dist_vanillaExtractCssAdapter.appendCss({
+    type: 'local',
+    selector: className,
+    rule
+  }, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+  return className;
+}
+/**
+ * @deprecated The same functionality is now provided by the 'style' function when you pass it an array
+ */
+
+function composeStyles(...classNames) {
+  const compose = fileScope_dist_vanillaExtractCssFileScope.hasFileScope() ? composedStyle : transformCss_dist_vanillaExtractCssTransformCss.dudupeAndJoinClassList;
+  return compose(classNames);
+}
+function globalStyle(selector, rule) {
+  adapter_dist_vanillaExtractCssAdapter.appendCss({
+    type: 'global',
+    selector,
+    rule
+  }, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+}
+function fontFace(rule, debugId) {
+  const fontFamily = `"${cssesc__default['default'](generateIdentifier(debugId), {
+    quotes: 'double'
+  })}"`;
+
+  if ('fontFamily' in rule) {
+    throw new Error(dedent__default['default']`
+          This function creates and returns a hashed font-family name, so the "fontFamily" property should not be provided.
+  
+          If you'd like to define a globally scoped custom font, you can use the "globalFontFace" function instead.
+        `);
+  }
+
+  adapter_dist_vanillaExtractCssAdapter.appendCss({
+    type: 'fontFace',
+    rule: { ...rule,
+      fontFamily
+    }
+  }, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+  return fontFamily;
+}
+function globalFontFace(fontFamily, rule) {
+  adapter_dist_vanillaExtractCssAdapter.appendCss({
+    type: 'fontFace',
+    rule: { ...rule,
+      fontFamily
+    }
+  }, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+}
+function keyframes(rule, debugId) {
+  const name = cssesc__default['default'](generateIdentifier(debugId), {
+    isIdentifier: true
+  });
+  adapter_dist_vanillaExtractCssAdapter.appendCss({
+    type: 'keyframes',
+    name,
+    rule
+  }, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+  return name;
+}
+function globalKeyframes(name, rule) {
+  adapter_dist_vanillaExtractCssAdapter.appendCss({
+    type: 'keyframes',
+    name,
+    rule
+  }, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+}
+function styleVariants(...args) {
+  if (typeof args[1] === 'function') {
+    const data = args[0];
+    const mapData = args[1];
+    const debugId = args[2];
+    const classMap = {};
+
+    for (const key in data) {
+      classMap[key] = style(mapData(data[key], key), debugId ? `${debugId}_${key}` : key);
+    }
+
+    return classMap;
+  }
+
+  const styleMap = args[0];
+  const debugId = args[1];
+  const classMap = {};
+
+  for (const key in styleMap) {
+    classMap[key] = style(styleMap[key], debugId ? `${debugId}_${key}` : key);
+  }
+
+  return classMap;
+}
+
+exports.assignVars = assignVars;
+exports.composeStyles = composeStyles;
+exports.createGlobalTheme = createGlobalTheme;
+exports.createGlobalThemeContract = createGlobalThemeContract;
+exports.createTheme = createTheme;
+exports.createThemeContract = createThemeContract;
+exports.createVar = createVar;
+exports.fallbackVar = fallbackVar;
+exports.fontFace = fontFace;
+exports.generateIdentifier = generateIdentifier;
+exports.globalFontFace = globalFontFace;
+exports.globalKeyframes = globalKeyframes;
+exports.globalStyle = globalStyle;
+exports.keyframes = keyframes;
+exports.style = style;
+exports.styleVariants = styleVariants;

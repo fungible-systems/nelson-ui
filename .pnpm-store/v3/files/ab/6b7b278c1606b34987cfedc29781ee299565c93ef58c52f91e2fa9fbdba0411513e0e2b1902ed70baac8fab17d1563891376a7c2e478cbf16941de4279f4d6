@@ -1,0 +1,77 @@
+{
+  "name": "rollup-plugin-size-snapshot",
+  "version": "0.12.0",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "test": "jest",
+    "prepublish": "yarn build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,md}": [
+      "prettier --write"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/flow",
+      [
+        "@babel/env",
+        {
+          "targets": {
+            "node": "10"
+          }
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "repository": "https://github.com/TrySound/rollup-plugin-size-snapshot",
+  "author": "Bogdan Chadkin <trysound@yandex.ru>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-flow": "^7.9.0",
+    "babel-jest": "^26.0.1",
+    "flow-bin": "^0.125.1",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "lint-staged": "^10.2.6",
+    "prettier": "2.0.5",
+    "redux": "^4.0.5",
+    "rollup": "^2.10.8",
+    "rollup-plugin-terser": "^6.0.0",
+    "strip-ansi": "^6.0.0"
+  },
+  "peerDependencies": {
+    "rollup": "^2.0.0"
+  },
+  "dependencies": {
+    "@rollup/plugin-replace": "^2.3.2",
+    "acorn": "^7.2.0",
+    "bytes": "^3.1.0",
+    "chalk": "^4.0.0",
+    "gzip-size": "^5.1.1",
+    "jest-diff": "^26.0.1",
+    "memory-fs": "^0.5.0",
+    "terser": "^4.7.0",
+    "webpack": "^4.43.0"
+  },
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6",
+    "yarn": ">=1"
+  }
+}

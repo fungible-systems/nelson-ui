@@ -1,6 +1,6 @@
 {
   "name": "@nelson-ui/core",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "prebuild": "pnpm typecheck && shx rm -rf ./dist",
     "build": "pnpm build:js && pnpm build:tsc",
@@ -37,7 +37,7 @@
     "*.css.ts"
   ],
   "dependencies": {
-    "@nelson-ui/theme": "0.0.0",
+    "@nelson-ui/theme": "0.0.1",
     "@vanilla-extract/css": "1.6.0",
     "@vanilla-extract/sprinkles": "1.3.0"
   },
