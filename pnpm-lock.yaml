@@ -111,7 +111,7 @@ importers:
 
   packages/core:
     specifiers:
-      '@nelson-ui/theme': 0.0.0
+      '@nelson-ui/theme': 0.0.1
       '@stacks/prettier-config': 0.0.8
       '@types/node': 16.9.6
       '@types/tinycolor2': 1.4.3
