@@ -44,7 +44,7 @@ jobs:
         run: |
           FILE_CHANGED=$(git status --porcelain)
           if [[ -n "${FILE_CHANGED}" ]]; then
-          echo -e "---\n'@nelson-ui/theme': patch\n---\n\nUpdate figma.json\n" > .changeset/figma-update.md && pnpm
+          echo -e "---\n'@nelson-ui/theme': patch\n---\n\nUpdate figma.json\n" > .changeset/figma-update.md
           fi
 
       - name: generate new theme
