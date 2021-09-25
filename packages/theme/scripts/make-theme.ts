@@ -12,16 +12,16 @@ import {
 } from './builders/theme';
 
 async function run() {
-  const light = transformThemes(DATA.values.light.colors);
-  const dark = transformThemes(DATA.values.dark.colors);
-  const foundation = transformColors(DATA.values.base.colors);
+  const light = transformThemes(DATA.record.values.light.colors);
+  const dark = transformThemes(DATA.record.values.dark.colors);
+  const foundation = transformColors(DATA.record.values.base.colors);
 
-  const letterSpacing = makeLetterSpacing(DATA.values.base.letterSpacing);
-  const fonts = makeFonts(DATA.values.base.fontFamilies);
-  const fontSizes = makeFontSizes(DATA.values.base.fontSizes);
-  const lineHeights = makeLineHeights(DATA.values.base.lineHeights);
-  const borderRadius = makeBorderRadius(DATA.values.base.borderRadius);
-  const boxShadow = makeBoxShadow(DATA.values.base.boxShadow, foundation);
+  const letterSpacing = makeLetterSpacing(DATA.record.values.base.letterSpacing);
+  const fonts = makeFonts(DATA.record.values.base.fontFamilies);
+  const fontSizes = makeFontSizes(DATA.record.values.base.fontSizes);
+  const lineHeights = makeLineHeights(DATA.record.values.base.lineHeights);
+  const borderRadius = makeBorderRadius(DATA.record.values.base.borderRadius);
+  const boxShadow = makeBoxShadow(DATA.record.values.base.boxShadow, foundation);
 
   const colors = {
     light,
