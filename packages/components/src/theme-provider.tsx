@@ -1,5 +1,5 @@
 import React from 'react';
-import { themeClass } from '@nelson-ui/core';
+import { themeClass } from '@nelson-ui/core/index.css.js';
 
 export const ThemeProvider: React.FC<{ theme: 'light' | 'dark' }> = ({
   children,

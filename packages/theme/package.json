@@ -4,9 +4,7 @@
   "private": false,
   "scripts": {
     "prebuild": "pnpm typecheck && shx rm -rf ./dist",
-    "build": "pnpm build:js && pnpm build:tsc",
-    "build:js": "vite build",
-    "build:tsc": "rollup -c \"./rollup.config.js\"",
+    "build": "vite build",
     "dev:publish": "yalc publish --push",
     "generate": "ts-eager scripts/make-theme.ts",
     "postgenerate": "pnpm lint:prettier:fix",

@@ -10,10 +10,7 @@
   "references": [
     {
       "path": "../theme/tsconfig.build.json"
-    },
-    {
-      "path": "../components/tsconfig.build.json"
-    },
+    }
   ],
   "include": ["src/**/*"]
 }

@@ -1,7 +1,26 @@
 {
   "extends": "../../tsconfig.json",
-  "include": [
-    "src/**/*",
-    "tests/**/*"
-  ]
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "tsBuildInfoFile": "./tsconfig.build.tsbuildinfo",
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@vanilla-extract/private": [
+        "node_modules/@vanilla-extract/private"
+      ],
+      "@nelson-ui/theme": [
+        "../theme"
+      ]
+    }
+  },
+  "references": [
+    {
+      "path": "../theme/tsconfig.build.json"
+    }
+  ],
+  "include": ["src/**/*"]
 }
+
