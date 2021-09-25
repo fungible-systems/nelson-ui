@@ -8,7 +8,14 @@ import {
   lineHeights,
   sizes,
 } from '@nelson-ui/theme';
-import { createGlobalTheme, createGlobalThemeContract, createTheme } from '@vanilla-extract/css';
+import {
+  createGlobalTheme,
+  createGlobalThemeContract,
+  createTheme,
+  globalStyle,
+  style,
+  styleVariants,
+} from '@vanilla-extract/css';
 import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles';
 
 const getColor = (
@@ -55,7 +62,7 @@ const commonVarsContract = createGlobalThemeContract(
   }
 );
 
-const [themeClass, vars] = createTheme({
+export const [themeClass, vars] = createTheme({
   ...commonVarsContract,
   ...colorsContract,
 });
@@ -69,10 +76,26 @@ const colorStyles = defineProperties({
 
 const layoutStyles = defineProperties({
   properties: {
-    display: ['none', 'block', 'flex', 'grid'],
+    display: [
+      'none',
+      'inline',
+      'inline-flex',
+      'inline-block',
+      'inline-grid',
+      'block',
+      'flex',
+      'grid',
+    ],
     flexDirection: ['row', 'column'],
     alignItems: ['center', 'flex-start', 'flex-end'],
-    justifyContent: ['center', 'flex-end', 'flex-start'],
+    justifyContent: [
+      'center',
+      'flex-end',
+      'flex-start',
+      'space-around',
+      'space-between',
+      'space-evenly',
+    ],
     paddingTop: vars.space,
     paddingBottom: vars.space,
     paddingLeft: vars.space,
@@ -112,6 +135,26 @@ createGlobalTheme(`html.light-theme`, colorsContract, {
   color: makeColors(colors.light),
 });
 
-const atoms = createSprinkles(layoutStyles, colorStyles);
+export const stackGaps = styleVariants(vars.space, () => ({}));
+export const hStack = style({
+  display: 'flex',
+  flexDirection: 'row',
+});
+export const vStack = style({});
+export const atoms = createSprinkles(layoutStyles, colorStyles);
 
-export { atoms, themeClass };
+Object.entries(stackGaps).forEach(([space, className]) => {
+  globalStyle(`${className}.${hStack} > *:not(:last-child)`, {
+    // @ts-ignore
+    marginInlineEnd: vars.space[space],
+    marginInlineStart: 0,
+  });
+  globalStyle(`${className}.${vStack} > *:not(:last-child)`, {
+    // @ts-ignore
+    marginBottom: vars.space[space] as any,
+  });
+});
+
+globalStyle('html', {
+  background: vars.color.background,
+});
