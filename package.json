@@ -49,8 +49,5 @@
     "shx": "0.3.3",
     "ultra-runner": "^3.10.5",
     "vite": "2.5.10"
-  },
-  "workspaces": [
-    "packages/**"
-  ]
+  }
 }
