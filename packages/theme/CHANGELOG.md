@@ -1,5 +1,11 @@
 # @nelson-ui/theme
 
+## 0.1.0
+
+### Minor Changes
+
+- [#6](https://github.com/fungible-systems/nelson-ui/pull/6) [`736f1b1`](https://github.com/fungible-systems/nelson-ui/commit/736f1b1870380bad161d8082c2f7ac20796c6a21) Thanks [@aulneau](https://github.com/aulneau)! - Update figma.json
+
 ## 0.0.2
 
 ### Patch Changes

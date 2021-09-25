@@ -1,6 +1,6 @@
 {
   "name": "@nelson-ui/components",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "scripts": {
     "prebuild": "pnpm typecheck && shx rm -rf ./dist",
@@ -15,7 +15,9 @@
     "lint:prettier:fix": "prettier --write \"src/**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit --target esnext"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "import": "dist/index.es.js",
