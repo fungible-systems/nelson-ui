@@ -16,6 +16,7 @@
     "lint:prettier:fix": "prettier --write \"src/**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit --target esnext"
   },
+  "files": ["dist"],
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "import": "dist/index.es.js",
