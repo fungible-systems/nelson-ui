@@ -5,7 +5,8 @@
     "lint": "ultra -r lint",
     "build": "ultra -r build",
     "dev:publish": "ultra -r dev:publish",
-    "ci:publish": "ultra publish",
+    "preci:publish": "pnpm install && pnpm build",
+    "ci:publish": "ultra publish -r",
     "ci:version": "changeset version"
   },
   "private": true,
