@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@nelson-ui/core": ["packages/core/src"],
+      "@nelson-ui/core/*": ["packages/core/src/*"],
+      "@nelson-ui/theme": ["packages/theme/src"],
+      "@nelson-ui/components": ["packages/components/src"]
+    }
+  }
+}
