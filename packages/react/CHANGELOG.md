@@ -1,4 +1,4 @@
-# @nelson-ui/components
+# @nelson-ui/react
 
 ## 0.0.3
 
