@@ -8,3 +8,4 @@ dist-ssr
 .pnpm-store
 .pnpm-debug.log
 .rollup.cache
+.ultra.cache.json
