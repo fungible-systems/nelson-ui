@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   borderRadius,
   boxShadow,
@@ -21,6 +22,7 @@ import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles';
 const getColor = (
   color: keyof typeof colors.light | keyof typeof colors.dark,
   theme: typeof colors.light | typeof colors.dark
+  // @ts-ignore
 ) => colors.foundation[theme[color]];
 
 const makeColors = (_colors: typeof colors.light | typeof colors.dark) => {

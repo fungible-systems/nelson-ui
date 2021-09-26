@@ -30,7 +30,7 @@ export default defineConfig({
           rootDir: resolvePath('./src'),
           declaration: true,
           declarationDir: resolvePath('./dist/types'),
-          exclude: [resolvePath('./node_modules/**')],
+          // exclude: [resolvePath('./node_modules/**')],
           allowSyntheticDefaultImports: true,
         }),
         vanillaExtractPluginRollupPlugin({
