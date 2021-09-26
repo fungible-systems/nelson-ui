@@ -1,5 +1,11 @@
 # @nelson-ui/theme
 
+## 0.1.1
+
+### Patch Changes
+
+- [#8](https://github.com/fungible-systems/nelson-ui/pull/8) [`8d4a940`](https://github.com/fungible-systems/nelson-ui/commit/8d4a940da307327aff41521d0326dd900fe3a3b0) Thanks [@aulneau](https://github.com/aulneau)! - Adds some primitive components: `Stack`, `Flex`, `SpaceBetween` and renames components -> react
+
 ## 0.1.0
 
 ### Minor Changes

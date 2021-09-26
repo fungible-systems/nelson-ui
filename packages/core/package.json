@@ -1,6 +1,6 @@
 {
   "name": "@nelson-ui/core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "scripts": {
     "prebuild": "pnpm typecheck && shx rm -rf ./dist",
@@ -36,12 +36,11 @@
     },
     "./main.css": "./dist/main.css"
   },
-  "sideEffects":
-  [
+  "sideEffects": [
     "*.css.ts"
   ],
   "dependencies": {
-    "@nelson-ui/theme": "0.1.0",
+    "@nelson-ui/theme": "0.1.1",
     "@vanilla-extract/css": "1.6.0",
     "@vanilla-extract/private": "^1.0.1",
     "@vanilla-extract/sprinkles": "1.3.0"
