@@ -18,7 +18,7 @@
   },
   "references": [
     {
-      "path": "../theme/tsconfig.build.json"
+      "path": "../theme/tsconfig.json"
     }
   ],
   "include": ["src/**/*"]

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "lint": "ultra -r lint",
-    "build": "ultra -r build",
+    "build": "pnpm prepack -r",
     "dev:build": "pnpm build && pnpm dev:publish",
     "dev:build:watch": "ultra --watch dev:build ",
     "dev:publish": "ultra -r dev:publish",
@@ -40,5 +40,9 @@
     "ultra-runner": "3.10.5",
     "vite": "2.5.10",
     "vite-tsconfig-paths": "^3.3.14"
+  },
+  "dependencies": {
+    "bob-esbuild": "^2.0.0",
+    "bob-esbuild-cli": "^2.0.0"
   }
 }
