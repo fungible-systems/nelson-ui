@@ -1,5 +1,5 @@
 import React from 'react';
-import { hStack, stackGaps, vStack } from '@nelson-ui/core/index.css';
+import { hStack, stackGaps, vStack } from '@nelson-ui/core/styles.css';
 import { Box, BoxProps } from './box';
 
 /**

@@ -3,32 +3,37 @@
   "version": "0.0.4",
   "private": false,
   "scripts": {
+    "prepack": "pnpm prebuild && bob-esbuild build",
     "prebuild": "pnpm typecheck && shx rm -rf ./dist",
-    "build": "vite build",
+    "typecheck": "tsc --noEmit --target esnext",
     "dev:publish": "yalc publish --push",
     "lint": "pnpm lint:eslint && pnpm lint:prettier",
     "lint:eslint": "eslint \"src/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
     "lint:prettier": "prettier --check \"src/**/*.{ts,tsx}\" *.js",
-    "lint:prettier:fix": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "typecheck": "tsc --noEmit --target esnext"
+    "lint:prettier:fix": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "files": [
     "dist"
   ],
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
-  "import": "dist/index.es.js",
-  "react-native": "dist/index.cjs.js",
-  "types": "dist/types/index.d.ts",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "exports": {
-    "./package.json": "./package.json",
     ".": {
-      "main": "dist/index.cjs.js",
-      "module": "dist/index.es.js",
-      "import": "dist/index.es.js",
-      "react-native": "dist/index.cjs.js",
-      "types": "dist/types/index.d.ts"
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "main": "./dist/index.mjs",
+      "module": "./dist/index.mjs",
+      "import": "./dist/index.mjs"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "require": "./dist/*.js",
+      "main": "./dist/*.js",
+      "module": "./dist/*.mjs",
+      "import": "./dist/*.mjs"
     }
   },
   "dependencies": {
