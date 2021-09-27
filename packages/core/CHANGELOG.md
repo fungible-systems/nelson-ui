@@ -1,5 +1,14 @@
 # @nelson-ui/core
 
+## 0.0.5
+
+### Patch Changes
+
+- [#11](https://github.com/fungible-systems/nelson-ui/pull/11) [`a39529c`](https://github.com/fungible-systems/nelson-ui/commit/a39529c8fc21346ed3b5644dacf1e9fac5f711d7) Thanks [@aulneau](https://github.com/aulneau)! - This fixes the build system to not compile css, but offloads the responsiblity to consumers of these packages.
+
+- Updated dependencies [[`a39529c`](https://github.com/fungible-systems/nelson-ui/commit/a39529c8fc21346ed3b5644dacf1e9fac5f711d7)]:
+  - @nelson-ui/theme@0.1.2
+
 ## 0.0.4
 
 ### Patch Changes
