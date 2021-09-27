@@ -20,9 +20,14 @@ jobs:
         with:
           node-version: 14
           registry-url: https://registry.npmjs.org/
-      - name: install pnpm
-        run: npm i pnpm@latest -g
-      - name: install dependencies
+      - name: Cache .pnpm-store
+        uses: actions/cache@v1
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-node14-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Install pnpm
+        run: curl -f https://get.pnpm.io/v6.14.js | node - add --global pnpm@6
+      - name: pnpm Build
         run: pnpm install
       - name: create and publish versions
         uses: changesets/action@master
