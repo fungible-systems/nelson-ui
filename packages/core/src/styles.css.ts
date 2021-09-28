@@ -3,8 +3,6 @@ import {
   createGlobalThemeContract,
   createTheme,
   globalStyle,
-  style,
-  styleVariants,
 } from '@vanilla-extract/css';
 import { makeColors, makeContractRecord } from './utils';
 import {
@@ -114,25 +112,7 @@ createGlobalTheme(`html.light-theme`, colorsContract, {
   color: makeColors(colors.light),
 });
 
-export const stackGaps = styleVariants(vars.space, () => ({}));
-export const hStack = style({
-  display: 'flex',
-  flexDirection: 'row',
-});
-export const vStack = style({});
 export const atoms = createSprinkles(layoutStyles, colorStyles);
-
-Object.entries(stackGaps).forEach(([space, className]) => {
-  globalStyle(`${className}.${hStack} > *:not(:last-child)`, {
-    // @ts-ignore
-    marginInlineEnd: vars.space[space],
-    marginInlineStart: 0,
-  });
-  globalStyle(`${className}.${vStack} > *:not(:last-child)`, {
-    // @ts-ignore
-    marginBottom: vars.space[space] as any,
-  });
-});
 
 globalStyle('html', {
   background: vars.color.background,
