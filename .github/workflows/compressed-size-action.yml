@@ -1,12 +1,8 @@
-name: Compressed Size
-
+name: Compressed Size:w
 on: [ pull_request ]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - name: checkout code repository
         uses: actions/checkout@v2
