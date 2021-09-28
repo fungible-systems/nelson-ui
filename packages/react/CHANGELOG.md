@@ -1,5 +1,14 @@
 # @nelson-ui/react
 
+## 0.0.6
+
+### Patch Changes
+
+- [#13](https://github.com/fungible-systems/nelson-ui/pull/13) [`b45f3b8`](https://github.com/fungible-systems/nelson-ui/commit/b45f3b88a2013edf7b1c0d6a56f37483a641ed2f) Thanks [@aulneau](https://github.com/aulneau)! - This update moves the stack specific styles to the react package. Also adds compressed-size-action to this project.
+
+- Updated dependencies [[`b45f3b8`](https://github.com/fungible-systems/nelson-ui/commit/b45f3b88a2013edf7b1c0d6a56f37483a641ed2f)]:
+  - @nelson-ui/core@0.0.6
+
 ## 0.0.5
 
 ### Patch Changes
