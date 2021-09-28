@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "lint": "pnpm lint -r",
-    "build": "pnpm prepack -r",
+    "build": "pnpm build -r",
     "postbuild": "shx rm -rf ./dist",
     "dev:build": "pnpm build && pnpm dev:publish",
     "dev:publish": "pnpm -r dev:publish",

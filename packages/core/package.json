@@ -3,7 +3,7 @@
   "version": "0.0.5",
   "private": false,
   "scripts": {
-    "prepack": "shx rm -rf ./dist && bob-esbuild tsc && bob-esbuild build",
+    "build": "shx rm -rf ./dist && bob-esbuild tsc && bob-esbuild build",
     "typecheck": "tsc --noEmit --target esnext",
     "dev:publish": "yalc publish --push",
     "lint": "pnpm lint:eslint && pnpm lint:prettier",
