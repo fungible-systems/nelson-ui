@@ -3,13 +3,12 @@
   "compilerOptions": {
     "noEmit": false,
     "outDir": "./dist",
-    "rootDir": "./src",
     "tsBuildInfoFile": "./tsconfig.tsbuildinfo",
     "composite": true,
     "baseUrl": ".",
     "paths": {
       "@nelson-ui/theme": [
-        "../theme"
+        "../theme/src"
       ]
     }
   },
