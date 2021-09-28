@@ -67,7 +67,7 @@ importers:
 
   packages/core:
     specifiers:
-      '@nelson-ui/theme': 0.1.2
+      '@nelson-ui/theme': workspace:*
       '@stacks/prettier-config': 0.0.8
       '@types/node': 16.9.6
       '@types/tinycolor2': 1.4.3
@@ -96,8 +96,8 @@ importers:
     specifiers:
       '@dessert-box/core': 0.1.0
       '@dessert-box/react': 0.2.0
-      '@nelson-ui/core': 0.0.5
-      '@nelson-ui/theme': 0.1.2
+      '@nelson-ui/core': workspace:*
+      '@nelson-ui/theme': workspace:*
       '@radix-ui/react-polymorphic': 0.0.14
       '@types/node': 16.9.6
       '@types/react': 17.0.24

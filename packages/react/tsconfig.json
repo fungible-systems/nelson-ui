@@ -3,9 +3,27 @@
   "compilerOptions": {
     "noEmit": false,
     "outDir": "./dist",
-    "rootDir": "./src",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@nelson-ui/core": [
+        "../core/src"
+      ],
+      "@nelson-ui/core/*": [
+        "../core/src/*"
+      ],
+      "@nelson-ui/theme": [
+        "../theme/src"
+      ]
+    }
   },
+  "references": [
+    {
+      "path": "../theme/tsconfig.json"
+    },
+    {
+      "path": "../core/tsconfig.json"
+    }
+  ],
   "include": [
     "src/**/*",
     "tests/**/*"
