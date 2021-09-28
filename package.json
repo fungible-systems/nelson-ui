@@ -2,11 +2,11 @@
   "name": "nelson-ui-monorepo",
   "version": "0.0.0",
   "scripts": {
-    "lint": "ultra -r lint",
+    "lint": "pnpm lint -r",
     "build": "pnpm prepack -r",
+    "postbuild": "shx rm -rf ./dist",
     "dev:build": "pnpm build && pnpm dev:publish",
-    "dev:build:watch": "ultra --watch dev:build ",
-    "dev:publish": "ultra -r dev:publish",
+    "dev:publish": "pnpm -r dev:publish",
     "ci:publish": "pnpm build && pnpm publish -r --no-git-checks --access public",
     "ci:version": "pnpm changeset version && pnpm install --no-frozen-lockfile && git add .",
     "ci:generate": "ultra -r --filter \"@nelson-ui/theme\" generate && git add ."
@@ -21,6 +21,7 @@
     "@stacks/prettier-config": "^0.0.8",
     "@vanilla-extract/esbuild-plugin": "2.0.0",
     "@vanilla-extract/integration": "^1.4.0",
+    "@vanilla-extract/private": "^1.0.1",
     "@vanilla-extract/vite-plugin": "2.1.0",
     "esbuild": "0.13.2",
     "eslint": "7.32.0",

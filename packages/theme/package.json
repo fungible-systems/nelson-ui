@@ -3,8 +3,7 @@
   "version": "0.1.2",
   "private": false,
   "scripts": {
-    "prepack": "pnpm prebuild && bob-esbuild build",
-    "prebuild": "pnpm typecheck && shx rm -rf ./dist",
+    "prepack": "shx rm -rf ./dist && bob-esbuild tsc && bob-esbuild build",
     "typecheck": "tsc --noEmit --target esnext",
     "dev:publish": "yalc publish --push",
     "generate": "ts-eager scripts/make-theme.ts",

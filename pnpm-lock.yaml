@@ -11,6 +11,7 @@ importers:
       '@stacks/prettier-config': ^0.0.8
       '@vanilla-extract/esbuild-plugin': 2.0.0
       '@vanilla-extract/integration': ^1.4.0
+      '@vanilla-extract/private': ^1.0.1
       '@vanilla-extract/vite-plugin': 2.1.0
       bob-esbuild: ^2.0.0
       bob-esbuild-cli: ^2.0.0
@@ -43,6 +44,7 @@ importers:
       '@stacks/prettier-config': 0.0.8
       '@vanilla-extract/esbuild-plugin': 2.0.0
       '@vanilla-extract/integration': 1.4.0
+      '@vanilla-extract/private': 1.0.1
       '@vanilla-extract/vite-plugin': 2.1.0_vite@2.5.10
       esbuild: 0.13.2
       eslint: 7.32.0

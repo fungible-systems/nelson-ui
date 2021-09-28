@@ -4,7 +4,8 @@
     "noEmit": false,
     "outDir": "./dist",
     "rootDir": "./src",
-    "tsBuildInfoFile": "./tsconfig.build.tsbuildinfo",
+    "baseUrl": ".",
+    "tsBuildInfoFile": "./tsconfig.tsbuildinfo",
     "composite": true
   },
   "include": [
