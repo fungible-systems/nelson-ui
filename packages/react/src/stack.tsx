@@ -1,6 +1,7 @@
 import React from 'react';
 import { hStack, stackGaps, vStack } from './stack.css';
 import { Box, BoxProps } from './box';
+import clsx from 'clsx';
 
 /**
  * Gets only the valid children of a component,
@@ -23,23 +24,27 @@ export interface StackProps extends BoxProps {
 }
 
 export const Stack = React.forwardRef<HTMLElement, StackProps>(
-  ({ children, isInline, spacing = 'base', divider, shouldWrapChildren }, ref) => {
+  (
+    { children, className, isInline, spacing = 'base', divider, shouldWrapChildren, ...rest },
+    ref
+  ) => {
     const directionClass = isInline ? hStack : vStack;
-    const className = `${directionClass} ${stackGaps[spacing]}`;
+    const stackClassName = `${directionClass} ${stackGaps[spacing]}`;
     const validChildren = getValidChildren(children);
+    const cn = clsx([stackClassName, className]);
     return (
-      <Box ref={ref} className={className}>
+      <Box ref={ref} className={cn} {...rest}>
         {validChildren.map((child, index) => {
           const isLastChild = validChildren.length === index + 1;
           if (shouldWrapChildren)
             return (
-              <React.Fragment key={`${className}-${index}`}>
+              <React.Fragment key={`${cn}-${index}`}>
                 <Box display="inline-block">{child}</Box>
                 {!isLastChild ? divider : null}
               </React.Fragment>
             );
           return (
-            <React.Fragment key={`${className}-${index}`}>
+            <React.Fragment key={`${cn}-${index}`}>
               {child}
               {!isLastChild && divider ? divider : null}
             </React.Fragment>

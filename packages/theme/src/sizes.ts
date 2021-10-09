@@ -29,6 +29,7 @@ export const namedSpacingUnits = {
   'base-loose': baseSizes[5], //20px
   loose: baseSizes[6], //24px
   'extra-loose': baseSizes[8], //32px
+  auto: 'auto',
 };
 
 export const sizes = {

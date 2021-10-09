@@ -10,7 +10,7 @@ export const makeFonts = (
   const final = {};
   keys.sort().forEach(key => {
     const entry = fontFamilies[key];
-    final[key] = entry.value;
+    final[key] = `'${entry.value}'`;
   });
 
   return final;
@@ -44,6 +44,23 @@ export const makeFontSizes = (
       final[key] = `${entry.value}px`;
     } else {
       final[key] = `${entry}px`;
+    }
+  });
+
+  return final;
+};
+
+export const makeFontWeights = (
+  fontWeights: typeof DATA.values.base.fontWeights
+): Record<string, string> => {
+  const keys = Object.keys(fontWeights);
+  const final = {};
+  keys.sort().forEach(key => {
+    const entry = fontWeights[key];
+    if (typeof entry === 'object') {
+      final[key] = `${entry.value}`;
+    } else {
+      final[key] = `${entry}`;
     }
   });
 
