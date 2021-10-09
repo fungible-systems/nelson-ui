@@ -1,9 +1,9 @@
 {
   "name": "@nelson-ui/core",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": false,
   "scripts": {
-    "build": "shx rm -rf ./dist && bob-esbuild build",
+    "build": "shx rm -rf ./dist && bob-esbuild tsc && bob-esbuild build",
     "typecheck": "tsc --noEmit --target esnext",
     "dev:publish": "yalc publish --push",
     "lint": "pnpm lint:eslint && pnpm lint:prettier",
