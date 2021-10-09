@@ -1,5 +1,11 @@
 # @nelson-ui/theme
 
+## 0.1.3
+
+### Patch Changes
+
+- [#15](https://github.com/fungible-systems/nelson-ui/pull/15) [`0c0aeec`](https://github.com/fungible-systems/nelson-ui/commit/0c0aeec505aeb21e54b5705025445ffe51dae19b) Thanks [@aulneau](https://github.com/aulneau)! - This update adds more properties and general fixes from being used.
+
 ## 0.1.2
 
 ### Patch Changes
