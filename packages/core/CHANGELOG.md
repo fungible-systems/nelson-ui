@@ -1,5 +1,14 @@
 # @nelson-ui/core
 
+## 0.0.7
+
+### Patch Changes
+
+- [#15](https://github.com/fungible-systems/nelson-ui/pull/15) [`0c0aeec`](https://github.com/fungible-systems/nelson-ui/commit/0c0aeec505aeb21e54b5705025445ffe51dae19b) Thanks [@aulneau](https://github.com/aulneau)! - This update adds more properties and general fixes from being used.
+
+- Updated dependencies [[`0c0aeec`](https://github.com/fungible-systems/nelson-ui/commit/0c0aeec505aeb21e54b5705025445ffe51dae19b)]:
+  - @nelson-ui/theme@0.1.3
+
 ## 0.0.6
 
 ### Patch Changes
