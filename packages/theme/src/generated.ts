@@ -185,18 +185,7 @@ export const colors = {
   },
 } as const;
 export const letterSpacing = { default: '0%', 'extra-tight': '-2%', tight: '-1%' } as const;
-export const fonts = {
-  '0': '12px',
-  '1': '14px',
-  '2': '16px',
-  '3': '20px',
-  '4': '24px',
-  '5': '32px',
-  '6': '40px',
-  '7': '48px',
-  '8': '64px',
-  '9': '72px',
-} as const;
+export const fonts = { body: "'Inter'", headlines: "'Open Sauce'" } as const;
 export const fontSizes = {
   '0': '12px',
   '1': '14px',
@@ -235,49 +224,49 @@ export const lineHeights = {
 } as const;
 export const typeStyles = {
   Display01: {
-    fontFamily: "'Space Grotesk'",
+    fontFamily: "'Open Sauce'",
     fontWeight: 500,
     lineHeight: '80px',
     fontSize: '72px',
     letterSpacing: '-2%',
   },
   Display02: {
-    fontFamily: "'Space Grotesk'",
+    fontFamily: "'Open Sauce'",
     fontWeight: 500,
     lineHeight: '72px',
     fontSize: '64px',
     letterSpacing: '-2%',
   },
   Heading01: {
-    fontFamily: "'Space Grotesk'",
+    fontFamily: "'Open Sauce'",
     fontWeight: 500,
     lineHeight: '60px',
     fontSize: '48px',
     letterSpacing: '-2%',
   },
   Heading02: {
-    fontFamily: "'Space Grotesk'",
+    fontFamily: "'Open Sauce'",
     fontWeight: 500,
     lineHeight: '56px',
     fontSize: '40px',
     letterSpacing: '-2%',
   },
   Heading03: {
-    fontFamily: "'Space Grotesk'",
+    fontFamily: "'Open Sauce'",
     fontWeight: 500,
     lineHeight: '44px',
     fontSize: '32px',
     letterSpacing: '-2%',
   },
   Heading04: {
-    fontFamily: "'Space Grotesk'",
+    fontFamily: "'Open Sauce'",
     fontWeight: 500,
     lineHeight: '36px',
     fontSize: '24px',
     letterSpacing: '-1%',
   },
   Heading05: {
-    fontFamily: "'Space Grotesk'",
+    fontFamily: "'Open Sauce'",
     fontWeight: 500,
     lineHeight: '28px',
     fontSize: '20px',

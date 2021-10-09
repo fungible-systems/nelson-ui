@@ -42,7 +42,7 @@ async function run() {
 
   const fileContents = `export const colors = ${JSON.stringify(colors)} as const;
   export const letterSpacing = ${JSON.stringify(letterSpacing)} as const;
-  export const fonts = ${JSON.stringify(fontSizes)} as const;
+  export const fonts = ${JSON.stringify(fontFamilies)} as const;
   export const fontSizes = ${JSON.stringify(fontSizes)} as const;
   export const borderRadius = ${JSON.stringify(borderRadius)} as const;
   export const boxShadow = ${JSON.stringify(boxShadow)} as const;
