@@ -1,6 +1,5 @@
 import React from 'react';
 import { colors, typeStyles } from '@nelson-ui/theme';
-import { typeStyleClasses } from '@nelson-ui/core';
 import { Box, BoxProps } from './box';
 import clsx from 'clsx';
 
@@ -34,12 +33,5 @@ export const Text = React.forwardRef<
   }
 >(({ variant, className, ...props }, ref) => {
   const color = getDefaultColor(variant);
-  return (
-    <Box
-      className={clsx([typeStyleClasses[variant], className])}
-      ref={ref}
-      color={color}
-      {...props}
-    />
-  );
+  return <Box className={clsx([className])} ref={ref} color={color} {...props} />;
 });

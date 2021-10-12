@@ -36,14 +36,9 @@
     }
   },
   "dependencies": {
-    "@dessert-box/core": "0.1.0",
-    "@dessert-box/react": "0.2.0",
     "@nelson-ui/core": "workspace:*",
     "@nelson-ui/theme": "workspace:*",
-    "@radix-ui/react-polymorphic": "0.0.14",
-    "@vanilla-extract/css": "1.6.0",
-    "@vanilla-extract/sprinkles": "1.3.0",
-    "clsx": "^1.1.1"
+    "clsx": "1.1.1"
   },
   "prettier": "@stacks/prettier-config",
   "devDependencies": {

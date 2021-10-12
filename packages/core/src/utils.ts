@@ -1,23 +1,56 @@
 import { colors } from '@nelson-ui/theme';
+import { createStitches, createTheme, defaultThemeMap } from '@stitches/core';
+import { PSEUDO_TAGS } from './constants';
+import { themes } from './theme';
+import { ALL_CSS_PROPS } from './all-css-props';
+import { utils } from './utilities';
 
-const getColor = (
-  color: keyof typeof colors.light | keyof typeof colors.dark,
-  theme: typeof colors.light | typeof colors.dark
-  // @ts-ignore
-) => colors.foundation[theme[color]];
-export const makeColors = (_colors: typeof colors.light | typeof colors.dark) => {
-  const keys = Object.keys(_colors) as (keyof typeof colors.light)[];
-  const result = {} as any;
-  keys.forEach(key => {
-    result[key] = getColor(key, _colors);
+const cacheMap = new Map();
+
+export function makeColors(theme: keyof typeof colors) {
+  const result: any = {};
+  const colorTheme = colors[theme];
+  Object.keys(colorTheme).forEach((key: any) => {
+    result[key] = `$${colorTheme[key as keyof typeof colorTheme]}`;
   });
-  return result as Record<keyof typeof colors.light | keyof typeof colors.dark, string>;
+  return result as Record<keyof typeof colors.light, string>;
+}
+
+export const lightTheme = createTheme(themes.light);
+export const darkTheme = createTheme(themes.dark);
+
+export const makeStitchesWithTheme = (key: keyof typeof themes = 'light') => {
+  const match = cacheMap.get(key);
+  if (match) return cacheMap.get(key);
+  if (!themes[key]) throw new TypeError('Incorrect theme passed to "makeStitchesWithTheme".');
+  const stitches = createStitches({
+    theme: themes[key],
+  });
+  cacheMap.set(key, stitches);
+  return stitches;
 };
-export const makeContractRecord = <T>(record: T) => {
-  const keys = Object.keys(record);
-  const result = {} as any;
+
+export const cleanProps = ({ css = {}, ...props }: any) => {
+  const keys = Object.keys(props);
+  const cssProps: any = {};
+  const restProps: any = {};
+
   keys.forEach(key => {
-    result[key] = key;
+    if (PSEUDO_TAGS[key]) {
+      cssProps[(PSEUDO_TAGS as any)[key as any] as any] = props[key];
+    } else {
+      (defaultThemeMap as any)[key as any] ||
+      ALL_CSS_PROPS.includes(key) ||
+      Object.keys(utils).includes(key)
+        ? (cssProps[key] = props[key])
+        : (restProps[key] = props[key]);
+    }
   });
-  return result as Record<keyof typeof record, keyof typeof record>;
+  return {
+    cssProps: {
+      ...cssProps,
+      ...css,
+    },
+    ...restProps,
+  };
 };

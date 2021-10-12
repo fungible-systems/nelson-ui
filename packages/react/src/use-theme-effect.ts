@@ -1,29 +1,31 @@
 import { useLayoutEffect } from 'react';
-import { themeClass } from '@nelson-ui/core/styles.css';
+import { theme as lightTheme, darkTheme } from '@nelson-ui/core';
 
-type Themes = 'light-theme' | 'dark-theme';
+type Themes = typeof lightTheme.className | typeof darkTheme.className;
 
 const isSSR = typeof document === 'undefined';
 
 const noop = () => undefined;
 const useSafeLayoutEffect = isSSR ? noop : useLayoutEffect;
 
-const getInvert = (theme: Themes) => (theme === 'light-theme' ? 'dark-theme' : 'light-theme');
+const getInvert = (theme: Themes) =>
+  theme === lightTheme.className ? darkTheme.className : lightTheme.className;
 
-export const useThemeEffect = (defaultTheme: Themes = 'light-theme') => {
+export function useThemeEffect(theme: 'light' | 'dark' = 'light') {
+  const themeClass = theme === 'light' ? lightTheme.className : darkTheme.className;
   const htmlTag = !isSSR ? document.getElementsByTagName('html')[0] : undefined;
   const hasThemeClass = htmlTag?.classList.contains(themeClass);
   const hasModeClass =
-    htmlTag?.classList.contains('light-theme') || htmlTag?.classList.contains('dark-theme');
-  const isDifferentTheme = hasModeClass && !htmlTag?.classList.contains(defaultTheme);
+    htmlTag?.classList.contains(lightTheme.className) ||
+    htmlTag?.classList.contains(darkTheme.className);
+  const isDifferentTheme = hasModeClass && !htmlTag?.classList.contains(themeClass);
 
   useSafeLayoutEffect(() => {
     if (isSSR || !htmlTag) return;
     if (!hasThemeClass) htmlTag.classList.add(themeClass);
-    if (!hasModeClass) htmlTag.classList.add(defaultTheme);
     if (isDifferentTheme) {
-      htmlTag.classList.remove(getInvert(defaultTheme));
-      htmlTag.classList.add(defaultTheme);
+      htmlTag.classList.remove(getInvert(themeClass));
+      htmlTag.classList.add(themeClass);
     }
-  }, [isSSR, htmlTag, hasModeClass, hasThemeClass, defaultTheme]);
-};
+  }, [isSSR, htmlTag, hasModeClass, hasThemeClass]);
+}
