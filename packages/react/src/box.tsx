@@ -1,7 +1,28 @@
-import { createBox } from '@dessert-box/react';
-import { atoms } from '@nelson-ui/core/styles.css';
-import { OwnProps } from '@radix-ui/react-polymorphic';
+import React, { forwardRef, useMemo } from 'react';
+import clsx from 'clsx';
+import { CssThemeProps, cleanProps, css } from '@nelson-ui/core';
 
-export const Box = createBox({ atoms });
+type HTMLProperties = Omit<
+  React.AllHTMLAttributes<HTMLElement>,
+  'as' | 'color' | 'height' | 'width' | 'content' | 'translate' | 'size'
+>;
 
-export type BoxProps = OwnProps<typeof Box>;
+export interface BoxProps extends CssThemeProps, HTMLProperties {
+  as?: React.ElementType;
+  className?: string;
+}
+
+export const Box = forwardRef<HTMLElement, BoxProps>(
+  ({ as: Comp = 'div', className, children, css: cssProp, ...props }: BoxProps, ref) => {
+    const { cssProps, ...rest } = useMemo(() => cleanProps(props), [props]);
+    const stitches = useMemo(
+      () => css(cssProps)({ css: cssProp as any }),
+      [css, cssProps, cssProp]
+    );
+    return (
+      <Comp ref={ref} className={clsx([className, stitches.className])} {...rest}>
+        {children}
+      </Comp>
+    );
+  }
+);
