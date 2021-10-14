@@ -1,5 +1,7 @@
 export * from './box';
 export * from './flex';
+export * from './centered';
+export * from './icon-button';
 export * from './circle';
 export * from './grid';
 export * from './space-between';

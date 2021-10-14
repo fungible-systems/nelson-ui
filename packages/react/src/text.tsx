@@ -29,9 +29,21 @@ const getDefaultColor = (type: keyof typeof typeStyles): keyof typeof colors['li
 export const Text = React.forwardRef<
   HTMLElement,
   BoxProps & {
-    variant: keyof typeof typeStyles;
+    variant?: keyof typeof typeStyles;
   }
->(({ variant, className, ...props }, ref) => {
-  const color = getDefaultColor(variant);
-  return <Box className={clsx([className])} ref={ref} color={color} {...props} />;
+>(({ variant, className, css = {}, ...props }, ref) => {
+  const color = variant && getDefaultColor(variant);
+  const styles = variant ? typeStyles[variant] : {};
+  return (
+    <Box
+      className={clsx([className])}
+      ref={ref}
+      color={color}
+      css={{
+        ...styles,
+        ...css,
+      }}
+      {...props}
+    />
+  );
 });
