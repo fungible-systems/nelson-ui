@@ -78,12 +78,6 @@ export type CSS<Media = {}, Theme = {}, ThemeMap = DefaultThemeMap, Utils = {}> 
     | undefined;
 };
 
-//     {
-//   // unknown css declaration styles
-//   /** Unknown property. */
-//   // [K in keyof CSSProperties]: number | string | CSS<Media, Theme, ThemeMap, Utils> | {} | undefined;
-// };
-
 /** Unique symbol used to reference a property value. */
 export declare const $$PropertyValue: unique symbol;
 

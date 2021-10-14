@@ -1,7 +1,13 @@
 import React from 'react';
-import { Flex } from './flex';
-import { BoxProps } from './box';
+import { Stack, StackProps } from './stack';
 
-export const SpaceBetween = React.forwardRef<HTMLElement, BoxProps>((props, ref) => (
-  <Flex ref={ref} alignItems="center" justifyContent="space-between" {...props} />
+export const SpaceBetween = React.forwardRef<HTMLElement, StackProps>((props, ref) => (
+  <Stack
+    spacing="$0"
+    isInline
+    ref={ref}
+    alignItems="center"
+    justifyContent="space-between"
+    {...props}
+  />
 ));

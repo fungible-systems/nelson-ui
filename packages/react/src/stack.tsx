@@ -23,7 +23,7 @@ export interface StackProps extends BoxProps {
 }
 
 export const Stack = React.forwardRef<HTMLElement, StackProps>(
-  ({ children, isInline, spacing = 'base', divider, shouldWrapChildren, ...rest }, ref) => {
+  ({ children, isInline, spacing = '$base', divider, shouldWrapChildren, ...rest }, ref) => {
     const validChildren = getValidChildren(children);
     return (
       <Flex ref={ref} gap={spacing} flexDirection={isInline ? 'row' : 'column'} {...rest}>

@@ -1,9 +1,9 @@
 import { colors } from '@nelson-ui/theme';
-import { createStitches, createTheme, defaultThemeMap } from '@stitches/core';
+import { createStitches, defaultThemeMap } from '@stitches/core';
 import { PSEUDO_TAGS } from './constants';
 import { themes } from './theme';
 import { ALL_CSS_PROPS } from './all-css-props';
-import { utils } from './utilities';
+import { config } from './stitches.config';
 
 const cacheMap = new Map();
 
@@ -15,9 +15,6 @@ export function makeColors(theme: keyof typeof colors) {
   });
   return result as Record<keyof typeof colors.light, string>;
 }
-
-export const lightTheme = createTheme(themes.light);
-export const darkTheme = createTheme(themes.dark);
 
 export const makeStitchesWithTheme = (key: keyof typeof themes = 'light') => {
   const match = cacheMap.get(key);
@@ -41,7 +38,7 @@ export const cleanProps = ({ css = {}, ...props }: any) => {
     } else {
       (defaultThemeMap as any)[key as any] ||
       ALL_CSS_PROPS.includes(key) ||
-      Object.keys(utils).includes(key)
+      Object.keys(config.utils).includes(key)
         ? (cssProps[key] = props[key])
         : (restProps[key] = props[key]);
     }
