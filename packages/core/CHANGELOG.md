@@ -1,5 +1,11 @@
 # @nelson-ui/core
 
+## 0.1.0
+
+### Minor Changes
+
+- [#17](https://github.com/fungible-systems/nelson-ui/pull/17) [`84ed408`](https://github.com/fungible-systems/nelson-ui/commit/84ed40847b07a195108fe4fb66491d8c296de3e1) Thanks [@aulneau](https://github.com/aulneau)! - This update removes @vanilla-extract/\* in favor of stitches.
+
 ## 0.0.7
 
 ### Patch Changes
