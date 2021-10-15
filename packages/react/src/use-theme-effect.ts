@@ -1,12 +1,9 @@
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import { theme as lightTheme, darkTheme } from '@nelson-ui/core';
 
 type Themes = typeof lightTheme.className | typeof darkTheme.className;
 
 const isSSR = typeof document === 'undefined';
-
-const noop = () => undefined;
-const useSafeLayoutEffect = isSSR ? noop : useLayoutEffect;
 
 const getInvert = (theme: Themes) =>
   theme === lightTheme.className ? darkTheme.className : lightTheme.className;
@@ -20,12 +17,12 @@ export function useThemeEffect(theme: 'light' | 'dark' = 'light') {
     htmlTag?.classList.contains(darkTheme.className);
   const isDifferentTheme = hasModeClass && !htmlTag?.classList.contains(themeClass);
 
-  useSafeLayoutEffect(() => {
+  useEffect(() => {
     if (isSSR || !htmlTag) return;
     if (!hasThemeClass) htmlTag.classList.add(themeClass);
     if (isDifferentTheme) {
       htmlTag.classList.remove(getInvert(themeClass));
       htmlTag.classList.add(themeClass);
     }
-  }, [isSSR, htmlTag, hasModeClass, hasThemeClass]);
+  }, [isSSR, htmlTag, themeClass, hasModeClass, hasThemeClass]);
 }
