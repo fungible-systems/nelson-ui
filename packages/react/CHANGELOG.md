@@ -1,5 +1,14 @@
 # @nelson-ui/react
 
+## 0.1.1
+
+### Patch Changes
+
+- [#19](https://github.com/fungible-systems/nelson-ui/pull/19) [`e38a99e`](https://github.com/fungible-systems/nelson-ui/commit/e38a99e6b52c98a645582ccb0fce9f64c74214ac) Thanks [@aulneau](https://github.com/aulneau)! - This adds a dep to the theme effect, cleans it up a bit
+
+- Updated dependencies [[`e38a99e`](https://github.com/fungible-systems/nelson-ui/commit/e38a99e6b52c98a645582ccb0fce9f64c74214ac)]:
+  - @nelson-ui/core@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes
