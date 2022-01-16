@@ -4,7 +4,7 @@
     "noEmit": false,
     "outDir": "./dist",
     "tsBuildInfoFile": "./tsconfig.tsbuildinfo",
-    "composite": true,
+    "incremental": true,
     "baseUrl": ".",
     "paths": {
       "@nelson-ui/theme": [
