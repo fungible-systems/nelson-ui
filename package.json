@@ -4,7 +4,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --no-cache --parallel --continue",
-    "dev:publish": "turbo run dev:publish",
+    "dev:publish": "turbo run build && turbo run dev:publish --parallel",
     "lint": "turbo run lint",
     "test": "turbo run test",
     "clean": "turbo run clean && rm -rf node_modules",
