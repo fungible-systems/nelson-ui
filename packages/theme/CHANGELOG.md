@@ -1,5 +1,11 @@
 # @nelson-ui/theme
 
+## 0.1.4
+
+### Patch Changes
+
+- [#21](https://github.com/fungible-systems/nelson-ui/pull/21) [`674326a`](https://github.com/fungible-systems/nelson-ui/commit/674326aa0133208c6907985c3c75b2781e398fc9) Thanks [@aulneau](https://github.com/aulneau)! - This update changing the tooling around how the packages are bundled (turborepo and tsup)
+
 ## 0.1.3
 
 ### Patch Changes

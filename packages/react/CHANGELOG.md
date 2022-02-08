@@ -1,5 +1,15 @@
 # @nelson-ui/react
 
+## 0.1.2
+
+### Patch Changes
+
+- [#21](https://github.com/fungible-systems/nelson-ui/pull/21) [`674326a`](https://github.com/fungible-systems/nelson-ui/commit/674326aa0133208c6907985c3c75b2781e398fc9) Thanks [@aulneau](https://github.com/aulneau)! - This update changing the tooling around how the packages are bundled (turborepo and tsup)
+
+- Updated dependencies [[`674326a`](https://github.com/fungible-systems/nelson-ui/commit/674326aa0133208c6907985c3c75b2781e398fc9)]:
+  - @nelson-ui/core@0.1.2
+  - @nelson-ui/theme@0.1.4
+
 ## 0.1.1
 
 ### Patch Changes

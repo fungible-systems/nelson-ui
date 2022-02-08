@@ -1,46 +1,46 @@
 {
-  "name": "@nelson-ui/react",
-  "version": "0.1.1",
-  "private": false,
-  "scripts": {
-	"build": "shx rm -rf ./dist && tsup-node src/index.ts --format esm,cjs --dts --splitting --target es2020 --minify",
-	"dev": "tsup src/index.ts --format esm,cjs --watch --dts --external react @nelson-ui/core @nelson-ui/theme clsx",
-	"dev:publish": "yalc publish --push",
-	"lint": "TIMING=1 pnpm lint:eslint && TIMING=1 pnpm lint:prettier",
-	"lint:eslint": "eslint \"src/**/*.{ts,tsx}\"",
-	"lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
-	"lint:prettier": "prettier --check \"src/**/*.{ts,tsx}\" *.js",
-	"lint:prettier:fix": "prettier --write \"src/**/*.{ts,tsx}\"",
-	"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
-	"typecheck": "tsc --noEmit --target esnext"
-  },
-  "files": [
-	"dist"
-  ],
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "exports": {
-	".": {
-	  "types": "./dist/index.d.ts",
-	  "require": "./dist/index.js",
-	  "main": "./dist/index.mjs",
-	  "module": "./dist/index.mjs",
-	  "import": "./dist/index.mjs"
+	"name": "@nelson-ui/react",
+	"version": "0.1.2",
+	"private": false,
+	"scripts": {
+		"build": "shx rm -rf ./dist && tsup-node src/index.ts --format esm,cjs --dts --splitting --target es2020 --minify",
+		"dev": "tsup src/index.ts --format esm,cjs --watch --dts --external react @nelson-ui/core @nelson-ui/theme clsx",
+		"dev:publish": "yalc publish --push",
+		"lint": "TIMING=1 pnpm lint:eslint && TIMING=1 pnpm lint:prettier",
+		"lint:eslint": "eslint \"src/**/*.{ts,tsx}\"",
+		"lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
+		"lint:prettier": "prettier --check \"src/**/*.{ts,tsx}\" *.js",
+		"lint:prettier:fix": "prettier --write \"src/**/*.{ts,tsx}\"",
+		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+		"typecheck": "tsc --noEmit --target esnext"
+	},
+	"files": [
+		"dist"
+	],
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"require": "./dist/index.js",
+			"main": "./dist/index.mjs",
+			"module": "./dist/index.mjs",
+			"import": "./dist/index.mjs"
+		}
+	},
+	"dependencies": {
+		"@nelson-ui/core": "workspace:*",
+		"@nelson-ui/theme": "workspace:*",
+		"clsx": "1.1.1"
+	},
+	"prettier": "@stacks/prettier-config",
+	"devDependencies": {
+		"@types/node": "16.9.6",
+		"@types/react": "17.0.24",
+		"@types/react-dom": "17.0.9",
+		"ts-eager": "2.0.2",
+		"tsup": "^5.11.6",
+		"typescript": "4.4.3"
 	}
-  },
-  "dependencies": {
-	"@nelson-ui/core": "workspace:*",
-	"@nelson-ui/theme": "workspace:*",
-	"clsx": "1.1.1"
-  },
-  "prettier": "@stacks/prettier-config",
-  "devDependencies": {
-	"@types/node": "16.9.6",
-	"@types/react": "17.0.24",
-	"@types/react-dom": "17.0.9",
-	"ts-eager": "2.0.2",
-	"tsup": "^5.11.6",
-	"typescript": "4.4.3"
-  }
 }
