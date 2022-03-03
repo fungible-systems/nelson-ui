@@ -1,5 +1,11 @@
 # @nelson-ui/theme
 
+## 0.1.5
+
+### Patch Changes
+
+- [#23](https://github.com/fungible-systems/nelson-ui/pull/23) [`95eb8c6`](https://github.com/fungible-systems/nelson-ui/commit/95eb8c671fc4bbf45d4a60d1a78e284ea98b3c46) Thanks [@jjenzz](https://github.com/jjenzz)! - feat: new font-size and border-radius scale values
+
 ## 0.1.4
 
 ### Patch Changes

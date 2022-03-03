@@ -1,6 +1,6 @@
 {
   "name": "@nelson-ui/theme",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": false,
   "scripts": {
     "build": "shx rm -rf ./dist && tsup-node src/index.ts --format esm,cjs --dts --splitting --target es2020 --minify",
