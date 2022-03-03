@@ -9,8 +9,8 @@
     "test": "turbo run test",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-	"ci:publish": "pnpm build && pnpm publish -r --no-git-checks --access public",
-	"ci:version": "pnpm changeset version && pnpm install --no-frozen-lockfile && git add ."
+    "ci:publish": "pnpm build && pnpm publish -r --no-git-checks --access public",
+    "ci:version": "pnpm changeset version && pnpm install --no-frozen-lockfile && git add ."
   },
   "private": true,
   "workspaces": [
