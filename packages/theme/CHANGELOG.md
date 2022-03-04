@@ -1,5 +1,11 @@
 # @nelson-ui/theme
 
+## 0.1.6
+
+### Patch Changes
+
+- [#25](https://github.com/fungible-systems/nelson-ui/pull/25) [`0f3c60e`](https://github.com/fungible-systems/nelson-ui/commit/0f3c60e17d16979a54ff9ca0f34b5091f9e7ef50) Thanks [@jjenzz](https://github.com/jjenzz)! - Increase slate-200 contrast
+
 ## 0.1.5
 
 ### Patch Changes
