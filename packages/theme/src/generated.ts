@@ -173,7 +173,7 @@ export const colors = {
     'color-red-500': 'hsl(1, 72%, 66%)',
     'color-red-600': 'hsl(1, 60%, 49%)',
     'color-slate-100': 'hsl(240, 11%, 96%)',
-    'color-slate-200': 'hsl(240, 10%, 94%)',
+    'color-slate-200': 'hsl(240, 7%, 92%)',
     'color-slate-300': 'hsl(230, 9%, 87%)',
     'color-slate-400': 'hsl(217, 6%, 58%)',
     'color-slate-500': 'hsl(220, 4%, 47%)',
