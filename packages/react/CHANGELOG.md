@@ -1,5 +1,13 @@
 # @nelson-ui/react
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [[`0f3c60e`](https://github.com/fungible-systems/nelson-ui/commit/0f3c60e17d16979a54ff9ca0f34b5091f9e7ef50)]:
+  - @nelson-ui/theme@0.1.6
+  - @nelson-ui/core@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes
