@@ -1,5 +1,12 @@
 # @nelson-ui/core
 
+## 0.1.5
+
+### Patch Changes
+
+- Updated dependencies [[`091c85b`](https://github.com/fungible-systems/nelson-ui/commit/091c85b0d4463db4d344f181d9e56c8fb2298c46)]:
+  - @nelson-ui/theme@0.1.7
+
 ## 0.1.4
 
 ### Patch Changes

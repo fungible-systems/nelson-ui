@@ -1,5 +1,11 @@
 # @nelson-ui/theme
 
+## 0.1.7
+
+### Patch Changes
+
+- [#27](https://github.com/fungible-systems/nelson-ui/pull/27) [`091c85b`](https://github.com/fungible-systems/nelson-ui/commit/091c85b0d4463db4d344f181d9e56c8fb2298c46) Thanks [@jjenzz](https://github.com/jjenzz)! - Change surface-hovered to slate-100
+
 ## 0.1.6
 
 ### Patch Changes
