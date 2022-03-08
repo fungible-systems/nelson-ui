@@ -45,7 +45,7 @@ export const colors = {
     success: 'color-green-600',
     surface: 'color-base-white',
     'surface--disabled': 'color-slate-100',
-    'surface--hovered': 'color-slate-050',
+    'surface--hovered': 'color-slate-100',
     'surface--pressed': 'color-slate-200',
     'surface--selected': 'color-blue-050',
     'surface-accent': 'color-blue-050',
