@@ -1,5 +1,11 @@
 # @nelson-ui/react
 
+## 0.1.6
+
+### Patch Changes
+
+- [#29](https://github.com/fungible-systems/nelson-ui/pull/29) [`deee60d`](https://github.com/fungible-systems/nelson-ui/commit/deee60d8c84e12c33ab0faa8da7ca44ccb66d670) Thanks [@jjenzz](https://github.com/jjenzz)! - Prevent horizontal stack blowout
+
 ## 0.1.5
 
 ### Patch Changes
